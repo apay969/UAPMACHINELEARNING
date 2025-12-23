@@ -1,25 +1,57 @@
+# 🌿 Klasifikasi Daun Tanaman Menggunakan Deep Learning  
+### CNN • ResNet50 • VGG16
+
+Project ini merupakan implementasi **klasifikasi citra daun tanaman** menggunakan pendekatan **Deep Learning** berbasis **Convolutional Neural Network (CNN)** dan **Transfer Learning**.
+
+Dataset yang digunakan berasal dari **Kaggle**, dengan jumlah **lebih dari 6.000 citra daun tanaman**, yang terdiri dari berbagai kelas dan kondisi daun.  
+Aplikasi dibangun menggunakan **TensorFlow** dan **Streamlit** untuk menyediakan proses **training, evaluasi, dan visualisasi model secara interaktif**.
+
+---
+
+## 📂 Deskripsi Dataset
+
+- 📌 **Sumber Dataset:** Kaggle  
+- 📊 **Jumlah Data:** > 6.000 citra
+- 🖼️ **Format:** JPG / PNG
+- 🌱 **Objek:** Daun tanaman
+- 🏷️ **Label:** Folder-based (per kelas)
+- 📐 **Ukuran Input:** 224 × 224 pixel (RGB)
+
+### 📊 Pembagian Dataset
+Dataset dibagi secara otomatis menggunakan TensorFlow `tf.data` dengan rasio:
+
+| Split | Persentase |
+|------|------------|
+| Training | 70% |
+| Validation | 20% |
+| Testing | 10% |
+
+Pembagian ini bertujuan untuk memastikan model dapat:
+- Belajar dari data training
+- Disesuaikan melalui validation
+- Dievaluasi secara objektif pada test set
+
+---
+
 # 🧠 UAP – Image Classification  
 ### CNN • ResNet50 • VGG16
 
 Aplikasi **klasifikasi citra** berbasis **Deep Learning** menggunakan **TensorFlow & Streamlit**.  
-Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** pada dataset citra yang di-*upload* dalam format ZIP.
+Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** pada dataset citra daun tanaman yang di-*upload* dalam format ZIP.
 
 ---
 
 ## 🚀 Fitur Utama
 - Upload dataset citra (.zip)
-- Pembagian data otomatis:
-  - **Train:** 70%
-  - **Validation:** 20%
-  - **Test:** 10%
+- Pembagian dataset otomatis (Train / Validation / Test)
 - Pilihan model:
   - CNN (from scratch)
   - ResNet50 (pretrained ImageNet)
   - VGG16 (pretrained ImageNet)
-- Visualisasi:
+- Visualisasi performa model:
   - Accuracy & Loss
   - Evaluasi Test Set
-- Antarmuka interaktif dengan **Streamlit**
+- Antarmuka interaktif berbasis **Streamlit**
 
 ---
 
@@ -54,16 +86,16 @@ Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** p
 | Channels | 3 (RGB) |
 | Epoch | 1 – 30 |
 | Batch Size | 8, 16, 32 |
-| Loss | Sparse Categorical Crossentropy |
+| Loss Function | Sparse Categorical Crossentropy |
 | Optimizer | Adam (0.0001) |
 
 ---
 
 ## 📊 Hasil Evaluasi Model
 
-> Berikut adalah ringkasan hasil evaluasi model berdasarkan **Test Dataset (10%)**
+> Ringkasan hasil evaluasi berdasarkan **Test Dataset (10%)**
 
-### 🔍 Perbandingan Performa
+### 🔍 Perbandingan Performa Model
 
 | Model | Train Accuracy | Validation Accuracy | Test Accuracy | Test Loss |
 |------|---------------|---------------------|--------------|-----------|
@@ -71,21 +103,19 @@ Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** p
 | ResNet50 | **53.90%** | **52.06%** | **50.60%** | **1.3762** |
 | VGG16 | **97.57%** | **98.32%** | **98.04%** | **0.0660** |
 
-> 🔧 *Isi nilai di atas sesuai dengan hasil evaluasi pada file PDF.*
-
 ---
 
 ## 📈 Visualisasi
 Aplikasi menampilkan grafik:
 - **Accuracy vs Epoch**
 - **Loss vs Epoch**
-  
+
 Grafik dihasilkan otomatis setelah proses training selesai.
 
 ---
 
-## 🧪 Evaluasi
-Evaluasi dilakukan menggunakan **test dataset** yang belum pernah dilihat model selama training maupun validation.
+## 🧪 Evaluasi Model
+Evaluasi dilakukan menggunakan **test dataset** yang belum pernah digunakan pada tahap training maupun validation.
 
 Output evaluasi:
 - Test Accuracy
