@@ -67,9 +67,9 @@ Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** p
 
 | Model | Train Accuracy | Validation Accuracy | Test Accuracy | Test Loss |
 |------|---------------|---------------------|--------------|-----------|
-| CNN | **xx.xx%** | **xx.xx%** | **xx.xx%** | **x.xxxx** |
-| ResNet50 | **xx.xx%** | **xx.xx%** | **xx.xx%** | **x.xxxx** |
-| VGG16 | **xx.xx%** | **xx.xx%** | **xx.xx%** | **x.xxxx** |
+| CNN | **92.46%** | **95.20%** | **95.63%** | **0.1274** |
+| ResNet50 | **53.90%** | **52.06%** | **50.60%** | **1.3762** |
+| VGG16 | **97.57%** | **98.32%** | **98.04%** | **0.0660** |
 
 > 🔧 *Isi nilai di atas sesuai dengan hasil evaluasi pada file PDF.*
 
