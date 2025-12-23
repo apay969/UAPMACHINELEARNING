@@ -69,7 +69,7 @@ Tahapan preprocessing citra meliputi:
 📸 **Screenshot Preprocessing**  
 > Tambahkan screenshot hasil preprocessing di bawah ini:
 
-assets/preprocessing_resize.png
+assets/Screenshot 2025-12-23 185554.png
 assets/preprocessing_normalization.png
 
 
