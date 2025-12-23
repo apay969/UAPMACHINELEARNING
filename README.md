@@ -68,8 +68,8 @@ Tahapan preprocessing citra meliputi:
 
 📸 **Screenshot Preprocessing**  
 > Tambahkan screenshot hasil preprocessing di bawah ini:
-![Resize And Rescale Image](assets/Screenshot 2025-12-23 185554.png)
-![Splitting Data Image](assets/Screenshot 2025-12-23 185554.png)
+> 
+<img width="647" height="611" alt="Screenshot 2025-12-23 185554" src="https://github.com/user-attachments/assets/3c7ac5f5-2d5e-4dbe-8f1c-db705b11d8b7" />
 
 
 
