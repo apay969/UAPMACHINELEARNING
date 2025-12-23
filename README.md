@@ -1,10 +1,33 @@
 # 🌿 Klasifikasi Daun Tanaman Menggunakan Deep Learning  
 ### CNN • ResNet50 • VGG16
 
-Project ini merupakan implementasi **klasifikasi citra daun tanaman** menggunakan pendekatan **Deep Learning** berbasis **Convolutional Neural Network (CNN)** dan **Transfer Learning**.
+Project ini merupakan implementasi **klasifikasi citra daun tanaman** menggunakan pendekatan  
+**Deep Learning** berbasis **Convolutional Neural Network (CNN)** dan **Transfer Learning**.
 
-Dataset yang digunakan berasal dari **Kaggle**, dengan jumlah **lebih dari 6.000 citra daun tanaman**, yang terdiri dari berbagai kelas dan kondisi daun.  
-Aplikasi dibangun menggunakan **TensorFlow** dan **Streamlit** untuk menyediakan proses **training, evaluasi, dan visualisasi model secara interaktif**.
+Aplikasi dikembangkan menggunakan **TensorFlow** sebagai framework deep learning dan  
+**Streamlit** sebagai antarmuka website interaktif.
+
+Project ini bertujuan untuk:
+- Membandingkan performa **CNN from scratch** dan **model pretrained**
+- Menganalisis pengaruh arsitektur model terhadap akurasi klasifikasi citra
+- Menyediakan sistem klasifikasi berbasis website yang mudah digunakan
+
+---
+
+## 📌 Deskripsi Proyek
+
+Klasifikasi daun tanaman merupakan salah satu penerapan **Computer Vision** di bidang pertanian,  
+khususnya untuk:
+- Identifikasi jenis tanaman
+- Deteksi penyakit daun
+- Monitoring kondisi tanaman secara otomatis
+
+Dalam project ini digunakan **3 model deep learning**, yaitu:
+1. Custom CNN
+2. ResNet50
+3. VGG16  
+
+Model dilatih dan dievaluasi menggunakan dataset citra daun tanaman, kemudian dibandingkan berdasarkan performanya.
 
 ---
 
@@ -12,78 +35,140 @@ Aplikasi dibangun menggunakan **TensorFlow** dan **Streamlit** untuk menyediakan
 
 - 📌 **Sumber Dataset:** Kaggle  
 - 📊 **Jumlah Data:** > 6.000 citra
-- 🖼️ **Format:** JPG / PNG
+- 🖼️ **Format File:** JPG / PNG
 - 🌱 **Objek:** Daun tanaman
-- 🏷️ **Label:** Folder-based (per kelas)
-- 📐 **Ukuran Input:** 224 × 224 pixel (RGB)
+- 🏷️ **Label:** Folder-based (setiap folder merepresentasikan 1 kelas)
+- 📐 **Ukuran Input Model:** 224 × 224 pixel (RGB)
 
 ### 📊 Pembagian Dataset
-Dataset dibagi secara otomatis menggunakan TensorFlow `tf.data` dengan rasio:
 
-| Split | Persentase |
-|------|------------|
+Dataset dibagi secara otomatis menggunakan TensorFlow dengan rasio:
+
+| Dataset | Persentase |
+|-------|------------|
 | Training | 70% |
 | Validation | 20% |
 | Testing | 10% |
 
-Pembagian ini bertujuan untuk memastikan model dapat:
-- Belajar dari data training
-- Disesuaikan melalui validation
-- Dievaluasi secara objektif pada test set
+Pembagian ini bertujuan agar:
+- Model belajar dari data **training**
+- Parameter disesuaikan menggunakan **validation**
+- Evaluasi dilakukan secara objektif menggunakan **test set**
 
 ---
 
-# 🧠 UAP – Image Classification  
-### CNN • ResNet50 • VGG16
+## 🔄 Preprocessing Data
 
-Aplikasi **klasifikasi citra** berbasis **Deep Learning** menggunakan **TensorFlow & Streamlit**.  
-Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** pada dataset citra daun tanaman yang di-*upload* dalam format ZIP.
+Tahapan preprocessing citra meliputi:
 
----
+1. **Resize gambar** ke ukuran 224 × 224 pixel  
+2. **Normalisasi pixel** (0–255 → 0–1)  
+3. **Batching & Prefetching** untuk efisiensi training  
+4. **Label encoding otomatis** berdasarkan nama folder  
 
-## 🚀 Fitur Utama
-- Upload dataset citra (.zip)
-- Pembagian dataset otomatis (Train / Validation / Test)
-- Pilihan model:
-  - CNN (from scratch)
-  - ResNet50 (pretrained ImageNet)
-  - VGG16 (pretrained ImageNet)
-- Visualisasi performa model:
-  - Accuracy & Loss
-  - Evaluasi Test Set
-- Antarmuka interaktif berbasis **Streamlit**
+📸 **Screenshot Preprocessing**  
+> Tambahkan screenshot hasil preprocessing di bawah ini:
+
+assets/preprocessing_resize.png
+assets/preprocessing_normalization.png
+
+
+
 
 ---
 
-## 🧩 Arsitektur Model
+## 🧠 Penjelasan Model Deep Learning
 
-### 1️⃣ CNN (Custom)
-- Conv2D: 32 → 64 → 128
-- MaxPooling
-- Dense 256 + Dropout 0.5
+### 1️⃣ Convolutional Neural Network (CNN)
+
+#### 📖 Sejarah Singkat
+CNN pertama kali diperkenalkan pada tahun **1998** oleh **Yann LeCun** melalui arsitektur **LeNet-5**,  
+yang digunakan untuk pengenalan tulisan tangan.
+
+CNN dirancang khusus untuk:
+- Mengekstraksi fitur spasial dari citra
+- Mengurangi jumlah parameter dibanding neural network biasa
+
+#### 🧩 Arsitektur CNN pada Project
+- Conv2D: 32 → 64 → 128 filter
+- MaxPooling setiap layer
+- Fully Connected (Dense 256)
+- Dropout 0.5 untuk mencegah overfitting
 - Optimizer: Adam (lr = 0.0001)
 
+✅ **Kelebihan:**
+- Fleksibel
+- Cocok untuk dataset menengah
+- Mudah dikustomisasi
+
+❌ **Kekurangan:**
+- Butuh tuning manual
+- Kurang optimal untuk dataset sangat besar
+
+---
+
 ### 2️⃣ ResNet50
-- Pretrained ImageNet
+
+#### 📖 Sejarah Singkat
+ResNet diperkenalkan oleh **Microsoft Research** pada tahun **2015** dan memenangkan  
+kompetisi **ImageNet ILSVRC**.
+
+Inovasi utama ResNet adalah:
+> **Residual Connection (Skip Connection)**
+
+Teknik ini memungkinkan jaringan yang sangat dalam  
+(hingga ratusan layer) tetap stabil saat training.
+
+#### 🧩 Konfigurasi ResNet50
+- Pretrained: ImageNet
 - `include_top=False`
 - Global Average Pooling
 - Dense 512
 - Base model **dibekukan (freeze)**
 
+✅ **Kelebihan:**
+- Stabil untuk jaringan dalam
+- Baik untuk dataset besar
+
+❌ **Kekurangan:**
+- Perlu fine-tuning agar optimal
+- Kurang cocok jika data sangat berbeda dari ImageNet
+
+---
+
 ### 3️⃣ VGG16
-- Pretrained ImageNet
+
+#### 📖 Sejarah Singkat
+VGG16 dikembangkan oleh **Visual Geometry Group (Oxford)** pada tahun **2014**  
+dan terkenal dengan arsitekturnya yang **sederhana namun efektif**.
+
+VGG menggunakan:
+- Kernel kecil (3×3)
+- Arsitektur berlapis yang konsisten
+
+#### 🧩 Konfigurasi VGG16
+- Pretrained: ImageNet
 - `include_top=False`
 - Global Average Pooling
 - Dense 64
 - 10 layer terakhir **trainable**
 
+✅ **Kelebihan:**
+- Fitur sangat kuat
+- Cocok untuk transfer learning
+
+❌ **Kekurangan:**
+- Parameter besar
+- Konsumsi memori tinggi
+
 ---
 
 ## ⚙️ Konfigurasi Training
+
 | Parameter | Nilai |
-|---------|------|
+|--------|------|
 | Image Size | 224 × 224 |
-| Channels | 3 (RGB) |
+| Channels | RGB |
 | Epoch | 1 – 30 |
 | Batch Size | 8, 16, 32 |
 | Loss Function | Sparse Categorical Crossentropy |
@@ -93,42 +178,43 @@ Project ini membandingkan performa **Custom CNN**, **ResNet50**, dan **VGG16** p
 
 ## 📊 Hasil Evaluasi Model
 
-> Ringkasan hasil evaluasi berdasarkan **Test Dataset (10%)**
+### 🔍 Tabel Evaluasi
 
-### 🔍 Perbandingan Performa Model
-
-| Model | Train Accuracy | Validation Accuracy | Test Accuracy | Test Loss |
-|------|---------------|---------------------|--------------|-----------|
-| CNN | **92.46%** | **95.20%** | **95.63%** | **0.1274** |
-| ResNet50 | **53.90%** | **52.06%** | **50.60%** | **1.3762** |
+| Model | Train Acc | Val Acc | Test Acc | Test Loss |
+|-----|----------|---------|----------|-----------|
+| CNN | 92.46% | 95.20% | 95.63% | 0.1274 |
+| ResNet50 | 53.90% | 52.06% | 50.60% | 1.3762 |
 | VGG16 | **97.57%** | **98.32%** | **98.04%** | **0.0660** |
 
 ---
 
-## 📈 Visualisasi
-Aplikasi menampilkan grafik:
-- **Accuracy vs Epoch**
-- **Loss vs Epoch**
+## 📈 Analisis Perbandingan Model
 
-Grafik dihasilkan otomatis setelah proses training selesai.
+### 🔹 CNN
+Akurasi tinggi karena:
+- Dataset cukup representatif
+- Arsitektur CNN disesuaikan dengan kebutuhan dataset
 
----
-
-## 🧪 Evaluasi Model
-Evaluasi dilakukan menggunakan **test dataset** yang belum pernah digunakan pada tahap training maupun validation.
-
-Output evaluasi:
-- Test Accuracy
-- Test Loss
+Namun berpotensi overfitting jika dataset lebih kecil.
 
 ---
 
-## 📦 Struktur Dataset
-```text
-dataset/
-├── Apple___Apple_scab/
-│   ├── img1.jpg
-│   └── img2.jpg
-├── Blueberry___healthy/
-│   ├── img1.jpg
-│   └── img2.jpg
+### 🔹 ResNet50
+Akurasi rendah karena:
+- Base model terlalu umum
+- Layer dibekukan sehingga tidak beradaptasi optimal
+- Dataset daun berbeda signifikan dari ImageNet
+
+---
+
+### 🔹 VGG16
+Performa terbaik karena:
+- Transfer learning efektif
+- Fine-tuning layer akhir
+- Ekstraksi fitur sangat kuat untuk citra daun
+
+---
+
+
+
+
