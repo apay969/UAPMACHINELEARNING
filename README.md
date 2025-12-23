@@ -126,9 +126,9 @@ Output evaluasi:
 ## 📦 Struktur Dataset
 ```text
 dataset/
-├── class_1/
+├── Apple___Apple_scab/
 │   ├── img1.jpg
 │   └── img2.jpg
-├── class_2/
+├── Blueberry___healthy/
 │   ├── img1.jpg
 │   └── img2.jpg
